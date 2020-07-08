@@ -17,6 +17,10 @@ export const signUpUser = async (signUpData) => {
     return userData.config.data;
   }
 
+    export const getProfile = async (profileRecieved) => {
+      const profile = await api.get('/user/profile', profileRecieved)  
+      console.log(profile);    
+  }
  
 export const verifyUser = async () => {    
     const token = localStorage.getItem('authToken');
@@ -28,4 +32,6 @@ export const verifyUser = async () => {
       return false;
     }
   }
+
+
   
