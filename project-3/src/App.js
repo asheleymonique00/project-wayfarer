@@ -28,6 +28,7 @@ class App extends Component {
   handleSignUp = async (e, user) => {
     e.preventDefault();    
     const loadedUser = await signUpUser(user)
+    const userProfile = await getProfile(user);
     console.log(loadedUser);
     this.setState({
       currentUser: loadedUser
@@ -61,7 +62,7 @@ class App extends Component {
         currentUser: null
     })
     localStorage.removeItem('authToken');
-
+    this.props.history.push(`/`);
 }
 
 //Create modao for signup and login pop up
