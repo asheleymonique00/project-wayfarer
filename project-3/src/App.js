@@ -3,11 +3,14 @@ import './App.css';
 import { Route, Link, withRouter } from 'react-router-dom';
 import Modal from 'react-modal';
 
+
 import SignUp from './Components/SignUp';
 import Login from './Components/Login';
 import Profile from './Components/Profile';
+import Show from './Components/Show';
+import PostContainer from './Components/PostContainer';
 
-import { signUpUser, loginUser, verifyUser, getProfile } from './Service/api_helper';
+import { signUpUser, loginUser, verifyUser, getProfile, putProfile } from './Service/api_helper';
 
 class App extends Component {
   constructor(props) {
@@ -52,6 +55,16 @@ class App extends Component {
       userProfile: userProfile
     })
     this.props.history.push(`/profile`);
+  }
+
+  updateUser = async(e, values) => {
+    e.preventDefault();
+    console.log(values)
+    const updatedUser = await putProfile(values);
+    console.log(updatedUser)
+    this.setState({
+        currentUser: updatedUser
+    })
   }
 
   handleLogout = () => {
@@ -102,8 +115,12 @@ setModalFalse = () => {
       <main className="App-main">
         {this.state.userProfile && <Link to="/profile">Profile Page</Link>}
         <Route path="/profile" render={() => {
-         return <Profile userProfile={this.state.userProfile} />
-        }} />     
+         return <Profile updateUser={this.updateUser} profile={this.state.userProfile} />
+        }} />
+        <Route path="/show" render={() => {
+         return<Show />     
+        }} />
+        <PostContainer />
       </main>
     </div>
   );

@@ -21,6 +21,12 @@ export const signUpUser = async (signUpData) => {
       const profile = await api.get('/user/profile', profileRecieved)  
       return profile.data;   
   }
+
+  export const putProfile = async (values) => {
+    const updatedUser = await api.put('/user/profile', values);
+    console.log(updatedUser)
+    return updatedUser.data
+}
  
 export const verifyUser = async () => {    
     const token = localStorage.getItem('authToken');
@@ -31,6 +37,19 @@ export const verifyUser = async () => {
     } else {
       return false;
     }
+  }
+
+  export const getAllCities = async () => {
+    const cities = await api.get('/city/all');
+    console.log(cities.data);
+    return cities.data;
+
+  }
+
+  export const indexPosts = async () => {
+    const allPosts = await api.get('/post/all');
+    console.log(allPosts);
+    return allPosts.data;
   }
 
 
