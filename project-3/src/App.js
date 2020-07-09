@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import { Route, Link, withRouter } from 'react-router-dom';
+import Modal from 'react-modal';
 
 import SignUp from './Components/SignUp';
 import Login from './Components/Login';
@@ -13,15 +14,9 @@ class App extends Component {
     super(props);
 
     this.state = {
-      currentUser: null
-      // id: null,
-      // name: '',
-      // username: '',
-      // "img": null,
-      // "createdAt": "2020-07-08T16:34:23.861Z",
-      // "email": null,
-      // "City": null,
-      // "Posts": []
+      currentUser: null,
+      modal: false,
+      userProfile: null
     }
   }
 
@@ -31,7 +26,8 @@ class App extends Component {
     const userProfile = await getProfile(user);
     console.log(loadedUser);
     this.setState({
-      currentUser: loadedUser
+      currentUser: loadedUser,
+      userProfile: userProfile
       
     })
     this.props.history.push(`/profile`);
@@ -52,7 +48,8 @@ class App extends Component {
     const loadedUser = await loginUser(user);
     const userProfile = await getProfile(user);
     this.setState({
-      currentUser: loadedUser
+      currentUser: loadedUser, 
+      userProfile: userProfile
     })
     this.props.history.push(`/profile`);
   }
@@ -65,23 +62,47 @@ class App extends Component {
     this.props.history.push(`/`);
 }
 
+setModalTrue = () => {
+  this.setState({
+    modal: true
+  })
+}
+
+setModalFalse = () => {
+  this.setState({
+    modal: false
+  })
+}
+
 //Create modao for signup and login pop up
   render() {
+    Modal.setAppElement('#root')
   return (
     <div className="App">
       <header className="App-header">
         <h2>Wayfarer</h2>
         {this.state.currentUser ? <button onClick={this.handleLogout}>Logout</button> : (
-        <div>          
-          <SignUp handleSubmit={this.handleSignUp} />
-          <Login handleSubmit={this.handleLogin}/>
+          <div>  
+          {/* Wrap signup/login in modals and apply buttons to open close */}
+          <button onClick={() => this.setModalTrue()}>New User</button>
+            <Modal isOpen={this.state.modal}>
+              <h2>Welcome to Wayfarer - Please enter a new username and password</h2>
+              <SignUp handleSubmit={this.handleSignUp} />
+              <button onClick={() =>this.setModalFalse()}> Close</button>
+            </Modal>
+          <button onClick={() => this.setModalTrue()}>LogIn</button>
+            <Modal isOpen={this.state.modal}>
+            <h2>Welcome back to Wayfarer - Please enter your username and password</h2>
+              <Login handleSubmit={this.handleLogin}/>
+              <button onClick={() =>this.setModalFalse()}> Close</button>
+            </Modal>
         </div>
       )}
       </header>
       <main className="App-main">
-        {this.state.currentUser && <Link to="/profile">Profile Page</Link>}
+        {this.state.userProfile && <Link to="/profile">Profile Page</Link>}
         <Route path="/profile" render={() => {
-         return <Profile currentUser={this.state.currentUser} />
+         return <Profile userProfile={this.state.userProfile} />
         }} />     
       </main>
     </div>

@@ -19,7 +19,7 @@ export const signUpUser = async (signUpData) => {
 
     export const getProfile = async (profileRecieved) => {
       const profile = await api.get('/user/profile', profileRecieved)  
-      console.log(profile);    
+      return profile.data;   
   }
  
 export const verifyUser = async () => {    
