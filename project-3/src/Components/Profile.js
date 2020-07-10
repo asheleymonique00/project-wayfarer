@@ -2,14 +2,17 @@ import React, {Component} from 'react';
 import { Route, Link } from 'react-router-dom';
 import PostList from './PostList';
 import CreatePostForm from './CreatePostFrom';
-
+import Modal from 'react-modal';
+import SinglePost from './SinglePost';
 
 class Profile extends Component {
     constructor(props) {
     super(props);
 
     this.state = {
+        modal: false,
         name: props.profile.name,
+        email: props.profile.email,
         username:props.profile.username,
         img:props.profile.img,
         City: props.profile.City,
@@ -23,19 +26,51 @@ class Profile extends Component {
         })
     }
 
-    render(props) {    
+
+    setModalTrue = () => {
+        this.setState({
+          modal: true
+        })
+      }
+      
+      setModalFalse = () => {
+        this.setState({
+          modal: false
+        })
+      }
+      
+
+
+
+    render(props) {  
+        Modal.setAppElement('#root')  
     return (
         <div>
+
+            <img src={this.state.img} alt="profile pic" />
+            <h2>Username: {this.state.username}</h2>
+            <h2>Current City: {this.state.city}</h2>
+            <h2>Email: {this.state.email}</h2>
+            <p>Account Created: {this.state.createdAt}</p>
+            
+            <button onClick={() => this.setModalTrue()}>Edit Profile</button>
+            <Modal isOpen={this.state.modal}>
+
             <form onSubmit={(e) => this.props.updateUser(e, this.state)}>
                 <h1>Edit Account</h1>
                 <input type="text" name="name" placeholder="name" value={this.state.name} onChange={this.handleChange} />
                 <input type="text" name="username" placeholder="username" value={this.state.username} onChange={this.handleChange}/>
+                <input type="email" name="email" placeholder="email" value={this.state.email} onChange={this.handleChange}/>
                 <input type="text" name="img" placeholder="img" value={this.state.img} onChange={this.handleChange}/>
                 <input type="text" name="City" placeholder="city" value={this.state.City} onChange={this.handleChange}/>
                 <input type="submit" value="Submit Post" />
            </form>
-           <p>{this.state.createdAt}</p>
-        <Link to="/show">Show Cities</Link>
+
+           <button onClick={() =>this.setModalFalse()}>Return</button>
+            </Modal>
+
+
+            <Link to="/show">Show Cities</Link>
         <br></br>
         <Link to="/post/new">Create New Post</Link>
         <Route path="/post/new" render={() => {
@@ -44,11 +79,15 @@ class Profile extends Component {
         <br></br>
         <Link to="/post/all">All Posts</Link>        
         <Route exact path="/post/all" render={() => {
-                return <PostList posts={this.state.posts} />
+        return <PostList posts={this.state.posts} />
             }} /> 
+        <Route exact path="/post/:id" render={(props) => {
+        return <SinglePost postId={props.match.params.id} posts={this.state.posts} destroyPost={this.destroyPost}/>
+            }}  />
+       
         </div>
-    )  
-} 
+        )  
+    } 
 
 }
 

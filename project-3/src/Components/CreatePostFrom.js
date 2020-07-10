@@ -6,16 +6,13 @@ class CreatePostForm extends Component {
         super(props);
 
         this.state = {
-            title: "", 
-            image_url: "",
-            description: "",
-            fun_fact: ""
+          title: "",
+          body: "",
         }
     }
 
     handleChange = (e) => {
         this.setState({
-            //sets the values for the above this.state
             [e.target.name]: e.target.value
         })
     }
@@ -23,14 +20,32 @@ class CreatePostForm extends Component {
 
 
     render() {
-        return (//props sends to parent(App.js)
+        return (
+            <div>
+                <h2>Create new Post</h2>
             <form onSubmit={(e) => this.props.handleSubmit(e, this.state)}>
+
+                <label for="cities"> 
+                    Choose a city:
+                </label>
+
+                <select name="city" id="cities">
+                    <option value="San Francisco">San Francisco </option>
+                    <option value="New York"> New York</option>
+                    <option value="Sydney"> Sydney</option>
+                </select>
+
                 <input type="text" name="title" placeholder="title" onChange={this.handleChange} />
-                <input type="text" name="image_url" placeholder="image" onChange={this.handleChange} />
-                <input type="text" name="description" placeholder="description" onChange={this.handleChange} />
-                <input type="text" name="fun_fact" placeholder="fun_fact" onChange={this.handleChange} />
-                <input type="submit" value="subnmit post" />
+                <input type="text" name="body" placeholder="body" onChange={this.handleChange} />
+                {/* Will need dropdown for avaible cities */}
+
+
+
+
+
+                <input type="submit" value="Create post" />
             </form>
+            </div>
         )
     }
 }

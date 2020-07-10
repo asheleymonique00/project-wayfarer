@@ -9,6 +9,7 @@ import Login from './Components/Login';
 import Profile from './Components/Profile';
 import Show from './Components/Show';
 import PostContainer from './Components/PostContainer';
+import Home from './Components/Home';
 
 import { signUpUser, loginUser, verifyUser, getProfile, putProfile } from './Service/api_helper';
 
@@ -69,7 +70,9 @@ class App extends Component {
 
   handleLogout = () => {
     this.setState({
-        currentUser: null
+        currentUser: null,
+        userProfile: null,
+        modal: false,
     })
     localStorage.removeItem('authToken');
     this.props.history.push(`/`);
@@ -87,7 +90,7 @@ setModalFalse = () => {
   })
 }
 
-//Create modao for signup and login pop up
+
   render() {
     Modal.setAppElement('#root')
   return (
@@ -113,7 +116,7 @@ setModalFalse = () => {
       )}
       </header>
       <main className="App-main">
-        {this.state.userProfile && <Link to="/profile">Profile Page</Link>}
+  
         <Route path="/profile" render={() => {
          return <Profile updateUser={this.updateUser} profile={this.state.userProfile} />
         }} />
@@ -122,6 +125,9 @@ setModalFalse = () => {
         }} />
         <PostContainer />
       </main>
+
+      {!this.state.currentUser && <Home /> }
+
     </div>
   );
 }

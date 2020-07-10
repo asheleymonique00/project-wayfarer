@@ -11,7 +11,6 @@ export const signUpUser = async (signUpData) => {
 
   export const loginUser = async (loginData) => {
     const userData = await api.post('/auth/login', loginData);
-    console.log(userData);
     localStorage.setItem('authToken', userData.data.token);
     api.defaults.headers.common.authorization = `Bearer ${userData.data.token}`;
     return userData.config.data;
@@ -46,17 +45,21 @@ export const verifyUser = async () => {
 
   }
 
-  export const postPost = async(postData) => { 
-    const newPost = await api.post('/posts', postData);
+  export const postPost = async(postData,) => { 
+    const newPost = await api.post(`/post/1`, postData);
     console.log(newPost);
     return newPost;
   }
 
   export const indexPosts = async () => {
     const allPosts = await api.get('/post/all');
-    console.log(allPosts);
+    console.log(allPosts)
     return allPosts.data;
+    
   }
 
-
-  
+  //Delete a Post
+export const destroyPost = async (id) => {
+  const deleteUser = await api.delete(`/post/${id}`)
+  return deleteUser.data;
+}
