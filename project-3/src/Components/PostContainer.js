@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {Route, withRouter } from 'react-router-dom';
-import {postPost, indexPosts, destroyPost } from '../Service/api_helper';
+import { indexPosts, destroyPost } from '../Service/api_helper';
 import PostList from './PostList';
 import CreatePostForm from './CreatePostFrom';
 import SinglePost from './SinglePost';
@@ -19,16 +19,16 @@ class PostContainer extends Component {
 
 
 
-    createPost = async (e, postData) => {
-        e.preventDefault();
-        // console.log(postData);
-        const newPost = await postPost(postData);
-        const posts = this.state.posts;
-        posts.push(newPost.data);
-        this.setState({
-            posts: posts
-        })
-    }
+    // createPost = async (e, postData) => {
+    //     e.preventDefault();
+    //     // console.log(postData);
+    //     const newPost = await postPost(postData);
+    //     const posts = this.state.posts;
+    //     posts.push(newPost.data);
+    //     this.setState({
+    //         posts: posts
+    //     })
+    // }
 
 
 

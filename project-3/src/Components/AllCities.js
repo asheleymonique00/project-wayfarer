@@ -25,14 +25,6 @@ function AllCities(props) {
             })}
         </div>
     )
-
-    // const city = Object.keys(props.getAllCities);
-    // console.log(city);
-    // return (
-    //     {city.map(city => {
-    //         return <p>{city}: {</p>
-    //     })}
-    // )
 }
 
 export default AllCities;

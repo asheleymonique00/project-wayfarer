@@ -41,13 +41,3 @@ class Show extends Component {
 }
 
 export default Show;
-
-// return (
-//     <div>
-//         <h3>Post List</h3>
-//         {props.posts.map(post => {
-//             return <Link to={`/posts/${post.id}`}><h3>{post.title}</h3></Link>
-//         })}
-//     </div>
-
-
