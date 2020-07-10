@@ -47,7 +47,7 @@ export const verifyUser = async () => {
   }
 
   export const postPost = async(postData) => { 
-    const newPost = await api.post('/posts', postData);
+    const newPost = await api.post('/post', postData);
     console.log(newPost);
     return newPost;
   }
@@ -57,6 +57,12 @@ export const verifyUser = async () => {
     console.log(allPosts);
     return allPosts.data;
   }
+
+  //Delete a Post
+export const destroyPost = async (id) => {
+  const deleteUser = await api.delete(`/post/${id}`)
+  return deleteUser.data;
+}
 
 
   

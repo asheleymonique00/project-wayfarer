@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { Route, Link } from 'react-router-dom';
 import PostList from './PostList';
 import CreatePostForm from './CreatePostFrom';
+import SinglePost from './SinglePost';
 
 
 class Profile extends Component {
@@ -44,8 +45,12 @@ class Profile extends Component {
         <br></br>
         <Link to="/post/all">All Posts</Link>        
         <Route exact path="/post/all" render={() => {
-                return <PostList posts={this.state.posts} />
+        return <PostList posts={this.state.posts} />
             }} /> 
+        <Route exact path="/post/:id" render={(props) => {
+        return <SinglePost postId={props.match.params.id} posts={this.state.posts} destroyPost={this.destroyPost}/>
+            }}  />
+            
         </div>
     )  
 } 

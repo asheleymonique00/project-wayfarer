@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import {Route, withRouter } from 'react-router-dom';
-import {postPost, indexPosts} from '../Service/api_helper';
+import { postPost, indexPosts, destroyPost } from '../Service/api_helper';
 import PostList from './PostList';
 import CreatePostForm from './CreatePostFrom';
+import SinglePost from './SinglePost';
 
 class PostContainer extends Component {
     constructor(props) {
@@ -19,6 +20,7 @@ class PostContainer extends Component {
 
     createPost = async (e, postData) => {
         e.preventDefault();
+        console.log(postData);
         const newPost = await postPost(postData);
         const posts = this.state.posts;
         posts.push(newPost.data);
@@ -34,6 +36,19 @@ class PostContainer extends Component {
         })
     }
 
+    //Delete Post
+    destroyPost = async (id) => {
+        await destroyPost(id);
+        const allPosts = this.state.posts;
+        const remaiingPosts = allPosts.filter(post => {
+            return post.id !== id 
+        })
+        this.setState({
+            posts: remaiingPosts
+        })
+        this.props.history.push('/post');
+    }
+
     render() {
         return (
             <div>
@@ -43,6 +58,9 @@ class PostContainer extends Component {
                 <Route exact path="/post/all" render={() => {
                 return <PostList posts={this.state.posts} />
             }} /> 
+                <Route exact path="/post/:id" render={(props) => {
+                return <SinglePost postId={props.match.params.id} posts={this.state.posts} destroyPost={this.destroyPost}/>
+            }} />
             </div>
         )
     }
