@@ -11,31 +11,26 @@ class Show extends Component {
     constructor(props) {
         super(props);
 
-        this.state = {
-            cities: null
-        }
     }
 
-    componentDidMount = async () => {
-        const resp = await getAllCities();
-        this.setState({
-            cities: resp
-        })
-    }
-
+    
 
     
 
     render() {
         return (
             <div>
-                <Route exact path="/city/:id" render={(props) => {
-        return <SingleCity city={this.state.cities} 
-                        id={props.match.params.id}  />
-            }}  />
+
+
+
+        
+
+
+
+
                 <h2>Show Post Page</h2>
                 <nav>
-                {this.state.cities && <AllCities posts={this.state.cities}/>}
+                {this.props.cities && <AllCities posts={this.props.cities}/>}
                 </nav>
                 <main>
                 <PostContainer />

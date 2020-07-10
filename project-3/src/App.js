@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
-import { Route, Link, withRouter } from 'react-router-dom';
+import { Route, Link, withRouter, } from 'react-router-dom';
 import Modal from 'react-modal';
+
 
 
 import SignUp from './Components/SignUp';
@@ -10,8 +11,9 @@ import Profile from './Components/Profile';
 import Show from './Components/Show';
 import PostContainer from './Components/PostContainer';
 import Home from './Components/Home';
+import SingleCity from './Components/SingleCity';
 
-import { signUpUser, loginUser, verifyUser, getProfile, putProfile } from './Service/api_helper';
+import { getAllCities,signUpUser, loginUser, verifyUser, getProfile, putProfile } from './Service/api_helper';
 
 class App extends Component {
   constructor(props) {
@@ -20,9 +22,14 @@ class App extends Component {
     this.state = {
       currentUser: null,
       modal: false,
-      userProfile: null
+      userProfile: null,
+      cities: null
     }
   }
+
+
+
+
 
   handleSignUp = async (e, user) => {
     e.preventDefault();    
@@ -39,12 +46,15 @@ class App extends Component {
   }
 
   async componentDidMount() {
+    const resp = await getAllCities();
+    console.log(resp);
     const currentUser = await verifyUser();
-    if (currentUser) {
+
       this.setState({
-        currentUser: currentUser
+        currentUser: currentUser,
+        cities: resp
       })
-    }
+    
   }
 
   handleLogin = async (e, user) => {
@@ -121,10 +131,20 @@ setModalFalse = () => {
          return <Profile updateUser={this.updateUser} profile={this.state.userProfile} />
         }} />
         <Route path="/show" render={() => {
-         return<Show />     
+         return<Show  cities={this.state.cities}/>     
         }} />
         <PostContainer />
+        
       </main>
+
+
+      <Route path="/city/:id" render={(props) => {
+        return <SingleCity city={this.state.cities} 
+                        id={props.match.params.id}  />
+            }}  />
+
+
+
 
       {!this.state.currentUser && <Home /> }
 

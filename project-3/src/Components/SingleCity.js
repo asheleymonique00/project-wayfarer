@@ -2,15 +2,18 @@ import React from 'react';
 
 function SingleCity(props) {
     console.log(props.city)
-const singleCity = props.city.filter(cities => {
-    console.log(singleCity);
-    return props.id === cities.id;
+    console.log(props.id)
+const hello = props.city.filter(cities => {
+    
+    return parseInt(props.id) === cities.id;
 })
+console.log(hello)
     return(
         <div>
-            <h1> Welcome to {singleCity[0].name}</h1>
-
+            <h1> Welcome to {hello[0].name}</h1>
         </div>
+
+       
     )
 }
 
