@@ -1,5 +1,5 @@
 import React from 'react';
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 function AllCities(props) {
 
@@ -10,7 +10,13 @@ function AllCities(props) {
                 return (
                 <nav className="cityList">
                     <div key={id}>
+                        
+                        
+                    <Link to={`/city/${post.id}`}>
                         <h3>{post.name}</h3>
+                        </Link>
+                        
+                        
                         <br></br>
                         <img src= {post.img} alt="city picture" />
                     </div>
