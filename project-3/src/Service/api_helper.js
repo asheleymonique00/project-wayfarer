@@ -46,6 +46,12 @@ export const verifyUser = async () => {
 
   }
 
+  export const postPost = async(postData) => { 
+    const newPost = await api.post('/posts', postData);
+    console.log(newPost);
+    return newPost;
+  }
+
   export const indexPosts = async () => {
     const allPosts = await api.get('/post/all');
     console.log(allPosts);

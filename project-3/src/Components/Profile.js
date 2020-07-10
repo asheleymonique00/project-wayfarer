@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { Route, Link } from 'react-router-dom';
-import PostList from './PostList'
+import PostList from './PostList';
+import CreatePostForm from './CreatePostFrom';
 
 
 class Profile extends Component {
@@ -36,7 +37,12 @@ class Profile extends Component {
            <p>{this.state.createdAt}</p>
         <Link to="/show">Show Cities</Link>
         <br></br>
-        <Link to="/post/all">All Posts</Link>
+        <Link to="/post/new">Create New Post</Link>
+        <Route path="/post/new" render={() => {
+        return <CreatePostForm handleSubmit={this.createPost} />
+            }} />   
+        <br></br>
+        <Link to="/post/all">All Posts</Link>        
         <Route exact path="/post/all" render={() => {
                 return <PostList posts={this.state.posts} />
             }} /> 
