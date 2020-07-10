@@ -23,8 +23,9 @@ class CreatePostForm extends Component {
 
 
     render() {
-        return (//props sends to parent(App.js)
+        return (//props sends to parent(App.js)      
             <form onSubmit={(e) => this.props.handleSubmit(e, this.state)}>
+                <input type="submit" value="Submit"></input>
                 <input type="text" name="title" placeholder="title" onChange={this.handleChange} />
                 <input type="text" name="image_url" placeholder="image" onChange={this.handleChange} />
                 <input type="text" name="description" placeholder="description" onChange={this.handleChange} />
