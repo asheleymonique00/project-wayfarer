@@ -15,7 +15,7 @@ import PostContainer from './Components/PostContainer';
 
 
 import SingleCity from './Components/SingleCity';
-import Test from './Components/Test';
+import Test from './Components/Test/Test';
 import { getAllCities,signUpUser, loginUser, verifyUser, getProfile, putProfile, cityPosts } from './Service/api_helper';
 
 class App extends Component {
@@ -27,6 +27,7 @@ class App extends Component {
       modal: false,
       userProfile: null,
       cities: null,
+      cityPost: null
       // cityPost:null
     }
   }
@@ -52,18 +53,19 @@ class App extends Component {
   async componentDidMount() {
     const resp = await getAllCities();
     const currentUser = await verifyUser();
-
-//======================================
-    // const allPosts = await cityPosts();
-// Confirmed API call works
-//======================================
-
       this.setState({
         currentUser: currentUser,
         cities: resp,
-        // cityPost: allPosts,
       })
-      console.log(this.state.cityPost)
+      
+  }
+
+  handleCity = async(e, id) => {
+    e.preventDefault();
+    const cityId = await cityPosts(id)
+    this.setState({
+        cityPost: cityId
+    })
   }
 
   handleLogin = async (e, user) => {
@@ -150,10 +152,10 @@ setModalFalse = () => {
 
       <Route path="/city/:id" render={(props) => {
         return <SingleCity city={this.state.cities} 
-                        id={props.match.params.id}  />
+                        id={props.match.params.id} handleCity={this.handleCity}  />
             }}  />
 
-           {this.state.userProfile && <Test />}
+           {!this.state.userProfile && <Test />}
             {/* {this.state.cityPost ? <Home posts={this.state.cityPost} /> : <p>Loading...</p>} */}
     </div>
   );

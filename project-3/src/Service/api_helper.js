@@ -65,13 +65,13 @@ export const destroyPost = async (id) => {
 
 //Get posts by city id
 export const cityPosts = async (id) => {
-  const posts = await api.get(`post/city/1/all`)
+  const posts = await api.get(`post/city/${id}/all`)
   console.log(posts.data);
   return posts.data;
 }
 
 //EDIT POST
-export const editPost = async (id,postData) => {
+export const editPost = async (id, postData) => {
   const updatedPost = await api.post(`/post/${id}`, postData);
   console.log(updatedPost);
   return updatedPost.data;

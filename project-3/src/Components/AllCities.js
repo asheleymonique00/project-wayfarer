@@ -2,29 +2,27 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 function AllCities(props) {
-
+console.log(props)
     return (
         <div>
             {/* <Link to="/show">Landing Page</Link> */}
-            {props.posts.map((post, id) => {
+            {props.cities.map((city, id) => {
                 return (
                 <nav className="cityList">
                     <div key={id}>
                         
                         
-                    <Link to={`/city/${post.id}`}>
-                        <h3>{post.name}</h3>
+
+                    <Link to={`/city/${city.id}`}>
+                        <h3>{city.name}</h3>
                         </Link>
                         
-                    <h1>{post.id}</h1>
-                        
+                    <h1>{city.id}</h1>
+                    <Link to={`/post/city/${city.id}/all`}>Posts from here</Link> 
 
-                    {/* <Link to={`/city/${post.id}/all`}>
-                    <h2>Posts from {post.name} </h2>
-                    </Link>    
-                         */}
+                    
                         <br></br>
-                        <img src= {post.img} alt="city picture" />
+                        <img src= {city.img} alt="city picture" />
                     </div>
                 </nav>
                 )

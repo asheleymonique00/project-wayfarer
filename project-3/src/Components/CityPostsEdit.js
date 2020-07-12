@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-class TestEdit extends Component {
+class CityPostsEdit extends Component {
     constructor(props) {
         super(props);
 
@@ -8,7 +8,7 @@ class TestEdit extends Component {
             title: "",
             body:"",
             img:"",
-            cityId: this.props.cityId
+            cityId: ""
         }
     }
 
@@ -27,10 +27,11 @@ class TestEdit extends Component {
                 <input type="text" name="title" placeholder="Title" onChange={this.handleChange} />
                 <input type="text" name="body" placeholder="Body" onChange={this.handleChange} />
                 <input type="text" name="img" placeholder="Picture" onChange={this.handleChange} />
+                <input type="text" name="cityId" placeholder="cityId" onChange={this.handleChange} />
                 <input type="submit" value="Submit Post" />
             </form>
         )
     }
 }
 
-export default TestEdit;
+export default CityPostsEdit;

@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Route, Link, withRouter } from 'react-router-dom';
 
-import Home from './Home';
+import Home from '../Home';
 import TestEdit from './TestEdit';
-import { cityPosts, destroyPost, postPost, editPost } from '../Service/api_helper';
+import { cityPosts, destroyPost, postPost, editPost } from '../../Service/api_helper';
 
 class Test extends Component {
     constructor(props) {
