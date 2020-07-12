@@ -40,26 +40,39 @@ export const verifyUser = async () => {
 
   export const getAllCities = async () => {
     const cities = await api.get('/city/all');
-    console.log(cities.data);
+
     return cities.data;
 
   }
 
-  // export const postPost = async(postData,) => { 
-  //   const newPost = await api.post(`/post/1`, postData);
-  //   console.log(newPost);
-  //   return newPost;
-  // }
+  export const postPost = async(postData,) => { 
+    const newPost = await api.post(`/post/1`, postData);
+    console.log(newPost);
+    return newPost;
+  }
 
   export const indexPosts = async () => {
     const allPosts = await api.get('/post/all');
-    console.log(allPosts)
     return allPosts.data;
     
   }
 
   //Delete a Post
 export const destroyPost = async (id) => {
-  const deleteUser = await api.delete(`/post/${id}`)
-  return deleteUser.data;
+  const deletePost = await api.delete(`/post/${id}`)
+  return deletePost.data;
+}
+
+//Get posts by city id
+export const cityPosts = async (id) => {
+  const posts = await api.get(`post/city/1/all`)
+  console.log(posts.data);
+  return posts.data;
+}
+
+//EDIT POST
+export const editPost = async (id,postData) => {
+  const updatedPost = await api.post(`/post/${id}`, postData);
+  console.log(updatedPost);
+  return updatedPost.data;
 }

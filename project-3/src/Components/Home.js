@@ -1,21 +1,27 @@
 import React, {Component} from 'react';
-
-
-class Home extends Component {
-    constructor(props) {
-        super(props);
-
-
-    }
+import { Link } from 'react-router-dom'
 
 
 
-
-    render(props) {
-        return(
-            <h1>I am the home page</h1>
-        )
-    }
-}
+function Home(props){
+        console.log(props.posts)
+        return (
+            <div>
+              <h1>Hello I am the city posts test subject</h1>
+                    {props.posts.map((post, id) => {
+                        return(
+                            
+                            <div key={id}>
+                                <h2><Link to={`/post/${post.id}`}><h3>{post.title}</h3></Link></h2>
+                            {post.body}
+                            <Link to={`/post/${post.id}/edit`}>Edit Post</Link>
+                            <button onClick={() => props.destroyPost(post.id)}>Delete</button>
+                            </div>
+                        )
+                        })}
+                    </div>
+                        )
+                        }         
+        
 
 export default Home;

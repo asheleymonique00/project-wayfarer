@@ -16,7 +16,13 @@ function AllCities(props) {
                         <h3>{post.name}</h3>
                         </Link>
                         
+                    <h1>{post.id}</h1>
                         
+
+                    {/* <Link to={`/city/${post.id}/all`}>
+                    <h2>Posts from {post.name} </h2>
+                    </Link>    
+                         */}
                         <br></br>
                         <img src= {post.img} alt="city picture" />
                     </div>

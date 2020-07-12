@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {Route, withRouter } from 'react-router-dom';
-import { indexPosts, destroyPost } from '../Service/api_helper';
+import { indexPosts, destroyPost, postPost } from '../Service/api_helper';
 import PostList from './PostList';
 import CreatePostForm from './CreatePostFrom';
 import SinglePost from './SinglePost';
@@ -8,7 +8,8 @@ class PostContainer extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            posts: []
+            posts: [],
+            cityPosts: []
         }
     }
     componentDidMount(){
@@ -16,25 +17,24 @@ class PostContainer extends Component {
     }
 
 
+    createPost = async (e, postData) => {
+        e.preventDefault();
+        // console.log(postData);
+        const newPost = await postPost(postData);
+        const posts = this.state.posts;
+        posts.push(newPost.data);
+        this.setState({
+            posts: posts
+        })
+        this.props.history.push('/post/all');
+    }
 
-
-
-    // createPost = async (e, postData) => {
-    //     e.preventDefault();
-    //     // console.log(postData);
-    //     const newPost = await postPost(postData);
-    //     const posts = this.state.posts;
-    //     posts.push(newPost.data);
-    //     this.setState({
-    //         posts: posts
-    //     })
-    // }
-
-
-
-
-
-
+    postsCity = async () => {
+        const cityPosts = await cityPosts();
+        this.setState({
+            cityPosts:cityPosts
+        })
+    }
 
 
     readAllPosts = async () => {
@@ -53,7 +53,7 @@ class PostContainer extends Component {
         this.setState({
             posts: remaiingPosts
         })
-        this.props.history.push('/post');
+        this.props.history.push('/post/all');
     }
     render() {
         return (
@@ -67,6 +67,7 @@ class PostContainer extends Component {
                 <Route exact path="/post/:id" render={(props) => {
                 return <SinglePost postId={props.match.params.id} posts={this.state.posts} destroyPost={this.destroyPost}/>
             }} />
+            
             </div>
         )
     }

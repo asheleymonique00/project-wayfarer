@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import { Route, Link, withRouter, } from 'react-router-dom';
+import { Route, Link, withRouter } from 'react-router-dom';
 import Modal from 'react-modal';
 
 
@@ -9,11 +9,14 @@ import SignUp from './Components/SignUp';
 import Login from './Components/Login';
 import Profile from './Components/Profile';
 import Show from './Components/Show';
-import PostContainer from './Components/PostContainer';
-import Home from './Components/Home';
-import SingleCity from './Components/SingleCity';
 
-import { getAllCities,signUpUser, loginUser, verifyUser, getProfile, putProfile } from './Service/api_helper';
+import PostContainer from './Components/PostContainer';
+// import Home from './Components/Home';
+
+
+import SingleCity from './Components/SingleCity';
+import Test from './Components/Test';
+import { getAllCities,signUpUser, loginUser, verifyUser, getProfile, putProfile, cityPosts } from './Service/api_helper';
 
 class App extends Component {
   constructor(props) {
@@ -23,7 +26,8 @@ class App extends Component {
       currentUser: null,
       modal: false,
       userProfile: null,
-      cities: null
+      cities: null,
+      // cityPost:null
     }
   }
 
@@ -38,7 +42,7 @@ class App extends Component {
     console.log(loadedUser);
     this.setState({
       currentUser: loadedUser,
-      userProfile: userProfile
+      userProfile: userProfile,
       
     })
     this.props.history.push(`/profile`);
@@ -47,14 +51,19 @@ class App extends Component {
 
   async componentDidMount() {
     const resp = await getAllCities();
-    console.log(resp);
     const currentUser = await verifyUser();
+
+//======================================
+    // const allPosts = await cityPosts();
+// Confirmed API call works
+//======================================
 
       this.setState({
         currentUser: currentUser,
-        cities: resp
+        cities: resp,
+        // cityPost: allPosts,
       })
-    
+      console.log(this.state.cityPost)
   }
 
   handleLogin = async (e, user) => {
@@ -66,6 +75,7 @@ class App extends Component {
       userProfile: userProfile
     })
     this.props.history.push(`/profile`);
+    console.log(this.state.cities)
   }
 
   updateUser = async(e, values) => {
@@ -107,22 +117,22 @@ setModalFalse = () => {
     <div className="App">
       <header className="App-header">
         <h2>Wayfarer</h2>
+        <Link to={'/'}><button>Home</button></Link>
         {this.state.currentUser ? <button onClick={this.handleLogout}>Logout</button> : (
-          <div>  
-          {/* Wrap signup/login in modals and apply buttons to open close */}
-          <button onClick={() => this.setModalTrue()}>New User</button>
+          <div>
+               {/* <Route path="/" render={() => { 
+          return <Home/> }} /> */}
+{/* Need to review button - was breaking things */}
+         
+          <button onClick={() => this.setModalTrue()}>Ready to Begin?</button>
             <Modal isOpen={this.state.modal}>
-              <h2>Welcome to Wayfarer - Please enter a new username and password</h2>
+              <h2>Hello new person</h2>
               <SignUp handleSubmit={this.handleSignUp} />
-              <button onClick={() =>this.setModalFalse()}> Close</button>
-            </Modal>
-          <button onClick={() => this.setModalTrue()}>LogIn</button>
-            <Modal isOpen={this.state.modal}>
-            <h2>Welcome back to Wayfarer - Please enter your username and password</h2>
               <Login handleSubmit={this.handleLogin}/>
               <button onClick={() =>this.setModalFalse()}> Close</button>
             </Modal>
         </div>
+       
       )}
       </header>
       <main className="App-main">
@@ -143,11 +153,8 @@ setModalFalse = () => {
                         id={props.match.params.id}  />
             }}  />
 
-
-
-
-      {!this.state.currentUser && <Home /> }
-
+           {this.state.userProfile && <Test />}
+            {/* {this.state.cityPost ? <Home posts={this.state.cityPost} /> : <p>Loading...</p>} */}
     </div>
   );
 }

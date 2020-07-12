@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { getAllCities } from '../Service/api_helper'
+import { getAllCities, cityPosts } from '../Service/api_helper'
 import AllCities from './AllCities'
 import PostContainer from './PostContainer'
 import SingleCity from './SingleCity';
@@ -12,23 +12,13 @@ class Show extends Component {
         super(props);
 
     }
-
-    
-
     
 
     render() {
         return (
             <div>
 
-
-
-        
-
-
-
-
-                <h2>Show Post Page</h2>
+                <h2>All Cities</h2>
                 <nav>
                 {this.props.cities && <AllCities posts={this.props.cities}/>}
                 </nav>
