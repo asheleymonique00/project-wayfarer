@@ -120,12 +120,12 @@ setModalFalse = () => {
       <header className="App-header">
         <h2>Wayfarer</h2>
         <Link to={'/'}><button>Home</button></Link>
-        {this.state.currentUser ? <button onClick={this.handleLogout}>Logout</button> : (
+
+  {this.state.userProfile && <Link to={'/profile'}><button>Profile</button></Link> }
+
+        {this.state.currentUser ?  <button onClick={this.handleLogout}>Logout</button> : (
           <div>
-               {/* <Route path="/" render={() => { 
-          return <Home/> }} /> */}
-{/* Need to review button - was breaking things */}
-         
+               
           <button onClick={() => this.setModalTrue()}>Ready to Begin?</button>
             <Modal isOpen={this.state.modal}>
               <h2>Hello new person</h2>
