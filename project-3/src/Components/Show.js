@@ -4,8 +4,7 @@ import AllCities from './AllCities'
 import PostContainer from './PostContainer'
 import SingleCity from './SingleCity';
 import {Route} from 'react-router-dom';
-import CityPosts from './CityPosts';
-import CityPostsEdit from './CityPostsEdit';
+
 
 import Modal from 'react-modal';
 
@@ -32,21 +31,6 @@ class Show extends Component {
 
 
 
-    //USER MUST BE LOGGED ON TO POST NEW
-    createPost = async (e, postData) => {
-        e.preventDefault();
-        // console.log(postData);
-        const newPost = await postPost(postData);
-        const posts = this.state.posts;
-        posts.push(newPost.data);
-        this.setState({
-           cityPost: posts
-        })
-        // this.props.history.push('/');
-    }
-
-
-       
         updatePost = async(e, id, values) => {
             e.preventDefault();
             const updatedPost = await editPost(id, values);

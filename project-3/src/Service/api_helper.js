@@ -44,17 +44,14 @@ export const verifyUser = async () => {
     return cities.data;
 
   }
-
-  export const postPost = async(postData,) => { 
-    const newPost = await api.post(`/post/1`, postData);
+//CREATE NEW POSTS
+  export const postPost = async(postData, id) => { 
+    const newPost = await api.post(`/post/${id}`, postData);
+    console.log(newPost)
     return newPost;
   }
 
-  export const indexPosts = async () => {
-    const allPosts = await api.get('/post/all');
-    return allPosts.data;
-    
-  }
+ 
 
   //Delete a Post
 export const destroyPost = async (id) => {
@@ -71,6 +68,7 @@ export const cityPosts = async (id) => {
 //EDIT POST
 export const editPost = async (id, postData) => {
   const updatedPost = await api.post(`/post/${id}`, postData);
+  console.log(updatedPost)
   return updatedPost.data;
 }
 

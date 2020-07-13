@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import { Route, Link, withRouter } from 'react-router-dom';
 import PostList from './PostList';
-import CreatePostForm from './CreatePostFrom';
 import Modal from 'react-modal';
 import SinglePost from './SinglePost';
+import CityPostsEdit from './CityPostsEdit';
 import PostsUser from './PostsUser';
 import { getUserPosts, destroyPost, editPost } from '../Service/api_helper';
 
@@ -19,7 +19,8 @@ class Profile extends Component {
         img:props.profile.img,
         City: props.profile.City,
         createdAt: props.profile.createdAt,
-       userPosts: null     
+       userPosts: [],
+    
     }
 
     }
@@ -51,10 +52,6 @@ class Profile extends Component {
         console.log(this.state.userPosts)
       }
 
-      
-
-
-
       destroyPost = async(id) => {
         await destroyPost(id)
         const allPosts = this.state.userPosts;
@@ -66,9 +63,10 @@ class Profile extends Component {
         })
         console.log(this.state.userPosts)
     }
-
+//=================================================================
     updatePost = async(e, id, values) => {
         e.preventDefault();
+        console.log(e, id, values)
         const updatedPost = await editPost(id, values);
         const allPosts = this.state.userPosts;
         const editedPosts = allPosts.map(post => {
@@ -77,9 +75,9 @@ class Profile extends Component {
         this.setState({
             userPosts: editedPosts
         })
-        // this.props.history.push('/');
+        this.props.history.push('/profile'); 
     }
-
+//=========================================================================
 
     
 
@@ -112,24 +110,20 @@ class Profile extends Component {
             </Modal>
 
 
-            <Link to="/show">Show Cities</Link>
+            <button><Link to="/show">Show Cities</Link></button>
+        
         <br></br>
-        <Link to="/post/new">Create New Post</Link>
-        <Route path="/post/new" render={() => {
-        return <CreatePostForm handleSubmit={this.createPost} />
-            }} />   
-        <br></br>
-        <Link to="/post/all">All Posts</Link>        
-        <Route exact path="/post/all" render={() => {
-        return <PostList posts={this.state.posts} />
-            }} /> 
-        <Route exact path="/post/:id" render={(props) => {
-        return <SinglePost postId={props.match.params.id} posts={this.state.posts} destroyPost={this.destroyPost}/>
-            }}  />
+        <Route exact path="/profile" render={(props) => {
+        return <PostsUser destroyPost={this.destroyPost} posts={this.state.userPosts} /> 
+     }} />
+
+        <Route exact path="/profile/post/:id/edit" render={(props) => (
+                    <CityPostsEdit posts={this.state.userPosts} updatePost={this.updatePost} postId={props.match.params.id} />
+                )} />
+
+            
 
 
-        {this.state.userPosts && <PostsUser destroyPost={this.destroyPost} posts={this.state.userPosts} />}    
-       
         </div>
         )  
     } 

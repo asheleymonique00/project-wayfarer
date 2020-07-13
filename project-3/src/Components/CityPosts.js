@@ -1,16 +1,11 @@
-import React, {Component} from 'react';
-
-
-
+import React from 'react';
 
 function CityPosts(props){
-       console.log(props.posts)
         return (
             <div>
                     {props.posts.map((post, id) => {
                         return(
                             <div key={id}>
-                                Single Posts
                             <h3>{post.title}</h3>
                             <p>{post.body}</p>
                             </div>

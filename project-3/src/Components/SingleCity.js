@@ -1,7 +1,10 @@
 import React, {Component} from 'react';
-import { Link } from 'react-router-dom'
-import { cityPosts } from '../Service/api_helper';
-import CityPosts from "./CityPosts"
+import { Route, Link, withRouter } from 'react-router-dom';
+import { cityPosts, postPost } from '../Service/api_helper';
+import CityPosts from './CityPosts';
+import CreatePostForm from './CreatePostFrom'; 
+
+
 
 class SingleCity extends Component {
   constructor(props) {
@@ -22,13 +25,26 @@ class SingleCity extends Component {
     })
   }
 
+//========MAKE CREATE POSTS FUNCTION==================
 
+createPost = async (e, postData) => {
+  e.preventDefault();
+  console.log(postData);
+  const newPost = await postPost(postData, this.props.id);
+  const posts = this.state.posts;
+  posts.push(newPost.data);
+  this.setState({
+     posts: posts
+  })
+ 
+}
+
+//===================TESTING==================
    
     render() {
       const hello = this.props.city.filter(cities => {
         return parseInt(this.props.id) === cities.id;
     })
-    console.log(hello)
     return(
     <div>
         <h1> Welcome to {hello[0].name}</h1>
@@ -36,9 +52,11 @@ class SingleCity extends Component {
         <h2>Located in: {hello[0].state},  {hello[0].country}</h2>
 
     {this.state.posts ? <CityPosts posts={this.state.posts}/> : <p>Loading...</p> }
+
+    {this.state.posts ?<CreatePostForm handleSubmit={this.createPost}/> : <p>Loading...</p> }
         </div>
         )
     }
   }
-export default SingleCity;
+export default withRouter(SingleCity);
 

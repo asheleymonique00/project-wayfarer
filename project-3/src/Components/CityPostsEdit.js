@@ -8,7 +8,6 @@ class CityPostsEdit extends Component {
             title: "",
             body:"",
             img:"",
-            cityId: ""
         }
     }
 
@@ -19,15 +18,13 @@ class CityPostsEdit extends Component {
     }
 
 
-
     render() { 
+        console.log('hello')
         return(
             <form onSubmit={(e) => this.props.updatePost(e, this.props.postId, this.state)}>
-                <h1>Edit Current Post</h1>
+                <h1>Edit Current Post:</h1>
                 <input type="text" name="title" placeholder="Title" onChange={this.handleChange} />
                 <input type="text" name="body" placeholder="Body" onChange={this.handleChange} />
-                <input type="text" name="img" placeholder="Picture" onChange={this.handleChange} />
-                <input type="text" name="cityId" placeholder="cityId" onChange={this.handleChange} />
                 <input type="submit" value="Submit Post" />
             </form>
         )
