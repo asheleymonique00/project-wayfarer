@@ -62,7 +62,7 @@ handleClick = async(e, id) => {
         // this.props.history.push('/');
          }
 
-        //======= USER MUST BE LOGGED IN TO EDIT
+       
         updatePost = async(e, id, values) => {
             e.preventDefault();
             const updatedPost = await editPost(id, values);
@@ -102,15 +102,15 @@ handleClick = async(e, id) => {
                 {this.state.cityPost && <CityPosts createPost={this.createPost} destroyPost={this.destroyPost} posts={this.state.cityPost}/>}
                 
                 
-            {/* <button onClick={() => this.setModalTrue()}>Edit This Post</button>
+             {/* <button onClick={() => this.setModalTrue()}>Edit This Post</button> */}
 
-            <Modal isOpen={this.state.modal}>
+            {/* <Modal isOpen={this.state.modal}> */}
 
-            <CityPostsEdit posts={this.state.cityPost} updatePost={this.updatePost} postId={props.match.params.id} />
+            {/* <CityPostsEdit posts={this.state.cityPost} updatePost={this.updatePost} postId={props.match.params.id} /> */}
               
-              <button onClick={() =>this.setModalFalse()}> Close</button>
-            </Modal> */}
-                                       
+              {/* <button onClick={() =>this.setModalFalse()}> Close</button>
+            </Modal>
+                                        */}
             </div>
         )
     }

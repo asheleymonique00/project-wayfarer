@@ -9,7 +9,7 @@ import SignUp from './Components/SignUp';
 import Login from './Components/Login';
 import Profile from './Components/Profile';
 import Show from './Components/Show';
-
+import Home from './Components/Home';
 import PostContainer from './Components/PostContainer';
 // import Home from './Components/Home';
 
@@ -139,9 +139,14 @@ setModalFalse = () => {
       </header>
       <main className="App-main">
   
+
+  
         <Route path="/profile" render={() => {
          return <Profile updateUser={this.updateUser} profile={this.state.userProfile} />
         }} />
+
+
+
         <Route path="/show" render={() => {
          return<Show  cities={this.state.cities}/>     
         }} />
@@ -155,7 +160,7 @@ setModalFalse = () => {
                         id={props.match.params.id} handleCity={this.handleCity}  />
             }}  />
 
-           {!this.state.userProfile && <Test />}
+           {!this.state.userProfile && <Home />}
             {/* {this.state.cityPost ? <Home posts={this.state.cityPost} /> : <p>Loading...</p>} */}
     </div>
   );

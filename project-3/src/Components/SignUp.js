@@ -6,8 +6,8 @@ class SignUp extends Component {
 
         this.state = {
             username: "",
-            password: ""
-            //confirmPassword:
+            password: "",
+            confirmPassword: ""   
         }
     }
 
@@ -24,6 +24,7 @@ class SignUp extends Component {
             <h2>SignUp</h2>
             <input type="text" name="username" placeholder="Username" value={this.state.username} onChange={this.handleChange} />
             <input type="password" name="password" placeholder="Password" value={this.state.password} onChange={this.handleChange} />
+            {/* <input type="password" name="confirmPassword" placeholder="Confirm Password" value={this.state.confirmPassword} onChange={this.handleChange} /> */}
             <input type="submit" value="Register" />
         </form>
         )

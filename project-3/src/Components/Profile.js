@@ -1,9 +1,11 @@
 import React, {Component} from 'react';
-import { Route, Link } from 'react-router-dom';
+import { Route, Link, withRouter } from 'react-router-dom';
 import PostList from './PostList';
 import CreatePostForm from './CreatePostFrom';
 import Modal from 'react-modal';
 import SinglePost from './SinglePost';
+import PostsUser from './PostsUser';
+import { getUserPosts, destroyPost } from '../Service/api_helper';
 
 class Profile extends Component {
     constructor(props) {
@@ -16,8 +18,10 @@ class Profile extends Component {
         username:props.profile.username,
         img:props.profile.img,
         City: props.profile.City,
-        createdAt: props.profile.createdAt     
+        createdAt: props.profile.createdAt,
+       userPosts: null     
     }
+
     }
 
     handleChange = (e) => {
@@ -39,6 +43,37 @@ class Profile extends Component {
         })
       }
       
+      async componentDidMount() {
+        const posts = await getUserPosts();
+        this.setState({
+            userPosts: posts
+        })
+        console.log(this.state.userPosts)
+      }
+
+      
+
+
+
+      destroyPost = async(id) => {
+        await destroyPost(id)
+        const allPosts = this.state.userPosts;
+        const remainingPosts = allPosts.filter(post => {
+            return post.id  !== id
+        })
+        this.setState({
+            userPosts: remainingPosts
+        })
+        console.log(this.state.userPosts)
+    }
+
+
+
+    //   destroyPost = async (id) => {
+    //     await destroyPost(id);
+    //     this.props.history.push('/profile');
+    //     console.log(this.state.userPosts)
+    //   }
 
 
 
@@ -84,6 +119,9 @@ class Profile extends Component {
         <Route exact path="/post/:id" render={(props) => {
         return <SinglePost postId={props.match.params.id} posts={this.state.posts} destroyPost={this.destroyPost}/>
             }}  />
+
+
+        {this.state.userPosts && <PostsUser destroyPost={this.destroyPost} posts={this.state.userPosts} />}    
        
         </div>
         )  
@@ -92,4 +130,4 @@ class Profile extends Component {
 }
 
 
-export default Profile;
+export default withRouter(Profile);
