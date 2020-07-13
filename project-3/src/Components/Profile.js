@@ -5,7 +5,7 @@ import CreatePostForm from './CreatePostFrom';
 import Modal from 'react-modal';
 import SinglePost from './SinglePost';
 import PostsUser from './PostsUser';
-import { getUserPosts, destroyPost } from '../Service/api_helper';
+import { getUserPosts, destroyPost, editPost } from '../Service/api_helper';
 
 class Profile extends Component {
     constructor(props) {
@@ -67,14 +67,21 @@ class Profile extends Component {
         console.log(this.state.userPosts)
     }
 
+    updatePost = async(e, id, values) => {
+        e.preventDefault();
+        const updatedPost = await editPost(id, values);
+        const allPosts = this.state.userPosts;
+        const editedPosts = allPosts.map(post => {
+            return post.id === parseInt(id) ? updatedPost : post
+        }) 
+        this.setState({
+            userPosts: editedPosts
+        })
+        // this.props.history.push('/');
+    }
 
 
-    //   destroyPost = async (id) => {
-    //     await destroyPost(id);
-    //     this.props.history.push('/profile');
-    //     console.log(this.state.userPosts)
-    //   }
-
+    
 
 
     render(props) {  

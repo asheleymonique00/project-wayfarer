@@ -161,7 +161,7 @@ setModalFalse = () => {
             }}  />
 
            {!this.state.userProfile && <Home />}
-            {/* {this.state.cityPost ? <Home posts={this.state.cityPost} /> : <p>Loading...</p>} */}
+         
     </div>
   );
 }

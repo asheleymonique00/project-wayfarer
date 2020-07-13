@@ -24,24 +24,12 @@ class Show extends Component {
     
     async componentDidMount() {
         const resp = await getAllCities();
-        const allPosts = await cityPosts();
-        console.log(allPosts)
         this.setState({
             cities: resp,
-            cityPost: allPosts
         })
         console.log(this.state.cities)
     }
 
-
-handleClick = async(e, id) => {
-    e.preventDefault();
-    const cityId = await cityPosts(id)
-    this.setState({
-        cityPost: cityId
-    })
-    console.log(this.state.cityPost)
-}
 
 
     //USER MUST BE LOGGED ON TO POST NEW
@@ -57,10 +45,6 @@ handleClick = async(e, id) => {
         // this.props.history.push('/');
     }
 
-    destroyPost = async (id) => {
-        await destroyPost(id);
-        // this.props.history.push('/');
-         }
 
        
         updatePost = async(e, id, values) => {
@@ -99,18 +83,16 @@ handleClick = async(e, id) => {
                 {this.props.cities && <AllCities  handleClick={this.handleClick} cities={this.props.cities}/>}
                 </nav>
              
-                {this.state.cityPost && <CityPosts createPost={this.createPost} destroyPost={this.destroyPost} posts={this.state.cityPost}/>}
                 
-                
-             {/* <button onClick={() => this.setModalTrue()}>Edit This Post</button> */}
+             {/* <button onClick={() => this.setModalTrue()}>Edit This Post</button>
 
-            {/* <Modal isOpen={this.state.modal}> */}
+             <Modal isOpen={this.state.modal}> 
 
-            {/* <CityPostsEdit posts={this.state.cityPost} updatePost={this.updatePost} postId={props.match.params.id} /> */}
+            <CityPostsEdit posts={this.state.cityPost} updatePost={this.updatePost} />
               
-              {/* <button onClick={() =>this.setModalFalse()}> Close</button>
-            </Modal>
-                                        */}
+             <button onClick={() =>this.setModalFalse()}> Close</button>
+            </Modal> */}
+                                       
             </div>
         )
     }

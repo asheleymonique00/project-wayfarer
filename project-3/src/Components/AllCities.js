@@ -17,10 +17,7 @@ console.log(props)
                         <h3>{city.name}</h3>
                         </Link>
                         
-                    <h1>{city.id}</h1>
-                    <Link to={`/post/city/${city.id}/all`}>Posts from here</Link> 
 
-                    
                         <br></br>
                         <img src= {city.img} alt="city picture" />
                     </div>
