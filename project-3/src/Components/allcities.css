@@ -1,0 +1,56 @@
+/* body {
+    background-color: #282c34;
+} */
+
+.cityList {
+    background-color: #41d3bd;
+    margin-left: 350px;
+    margin-right: 350px;
+    /* font-size: large; */
+    border: 5px solid #e7ecef;
+    border-radius: 10px;    
+    /* opacity: 0.6; */
+    /* display: flex;
+    flex-direction: row;
+    justify-content: space-evenly; */
+}
+
+.cityListTitle {
+    font-size: 25px;
+    color: whitesmoke;
+    background-color: #282c34;
+}
+
+.createPost {
+    background-color: #f05d5e;
+}
+
+.cityPosts {
+    background-color: #41d3bd;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    
+    
+}
+
+.singlePost {
+    border: 15px solid #e7ecef;
+    border-radius: 75px;
+    color: #282c34;
+    padding: 65px;
+    background-color: #f3d34a;
+
+}
+
+.singleCity {
+    color: whitesmoke;
+    background-color: #41d3bd;
+}
+
+img {
+    width: 450px;
+    height: 400px;
+    margin-bottom: 50px;
+}
+

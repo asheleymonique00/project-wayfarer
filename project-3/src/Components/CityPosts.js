@@ -2,10 +2,10 @@ import React from 'react';
 
 function CityPosts(props){
     return (
-    <div>
+    <div className="cityPosts">
         {props.posts.map((post, id) => {
             return(
-            <div key={id}>
+            <div className="singlePost" key={id}>
                 <h3>{post.title}</h3>
                 <p>{post.body}</p>
             </div>

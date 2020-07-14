@@ -3,6 +3,7 @@ import { Route, Link, withRouter } from 'react-router-dom';
 import { cityPosts, postPost } from '../Service/api_helper';
 import CityPosts from './CityPosts';
 import CreatePostForm from './CreatePostFrom'; 
+import './allcities.css'
 
 
 class SingleCity extends Component {
@@ -34,7 +35,7 @@ class SingleCity extends Component {
       return parseInt(this.props.id) === cities.id;
     })
     return(
-    <div>
+    <div className="singleCity">
       <h1> Welcome to {hello[0].name}</h1>
       <img src={hello[0].img} alt={hello[0].name} />
       <h2>Located in: {hello[0].state},  {hello[0].country}</h2>

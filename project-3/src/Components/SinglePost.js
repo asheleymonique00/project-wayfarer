@@ -7,7 +7,7 @@ function SinglePost(props) {
     return (
     <div>
         {currentPost[0] && (
-        <div>
+        <div className="singlePost">
             <h2>{currentPost[0].title}</h2>
             <h4>{currentPost[0].body}</h4>
         </div>

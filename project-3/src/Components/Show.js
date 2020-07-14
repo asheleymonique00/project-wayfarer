@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import {Route} from 'react-router-dom';
 import { getAllCities, cityPosts, destroyPost, postPost, editPost } from '../Service/api_helper';
 import Modal from 'react-modal';
+import './allcities.css'
 
 //Custom imports
 import AllCities from './AllCities'
@@ -51,7 +52,7 @@ class Show extends Component {
     render() {
         Modal.setAppElement('#root')
         return (
-        <div>
+        <div className="cityListTitle">
             <h2>The Hottest Locations</h2>
             <nav>
                 {this.props.cities && <AllCities  handleClick={this.handleClick} cities={this.props.cities}/>}
