@@ -139,7 +139,7 @@ class App extends Component {
         
       </main>
       
-      {!this.state.userProfile && <Home />}
+      <Home />
          
     </div>
     );

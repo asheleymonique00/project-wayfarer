@@ -37,8 +37,9 @@ class SingleCity extends Component {
     return(
     <div className="singleCity">
       <h1> Welcome to {hello[0].name}</h1>
-      <img src={hello[0].img} alt={hello[0].name} />
       <h2>Located in: {hello[0].state},  {hello[0].country}</h2>
+      <img src={hello[0].img} alt={hello[0].name} />
+
       
       {this.state.posts ? <CityPosts posts={this.state.posts}/> : <p>Loading...</p> }
       {this.state.posts ?<CreatePostForm handleSubmit={this.createPost}/> : <p>Loading...</p> }

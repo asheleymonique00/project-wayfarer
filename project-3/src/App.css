@@ -3,7 +3,7 @@
   background-color: #282C34;
   height: 100vh;
   background-image: url("https://images.pexels.com/photos/3811022/pexels-photo-3811022.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
-  background-size: auto;
+  background-size: cover;
 }
 @media screen and (max-width: 1163px ) {
   .App, .profilePage {

@@ -52,8 +52,8 @@ class Show extends Component {
     render() {
         Modal.setAppElement('#root')
         return (
-        <div className="cityListTitle">
-            <h2>The Hottest Locations</h2>
+        <div >
+            <h2 className="cityListTitle">The Hottest Locations</h2>
             <nav>
                 {this.props.cities && <AllCities  handleClick={this.handleClick} cities={this.props.cities}/>}
             </nav>
