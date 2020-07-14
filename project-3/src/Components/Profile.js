@@ -77,11 +77,12 @@ class Profile extends Component {
     render(props) {  
         Modal.setAppElement('#root')  
         return(
-        <div>
+        <div className="profilePage">
+            <div className="userInfo">
             <img src={this.state.img} alt="profile pic" />
             <h2>Username: {this.state.username}</h2>
             <h2>Current City: {this.state.city}</h2>
-            <h2>Email: {this.state.email}</h2>
+            <h3>Email: {this.state.email}</h3>
             <p>Account Created: {this.state.createdAt}</p>
             
             <button onClick={() => this.setModalTrue()}>Edit Profile</button>
@@ -89,19 +90,20 @@ class Profile extends Component {
 
             <form onSubmit={(e) => this.props.updateUser(e, this.state)}>
                 <h1>Edit Account</h1>
-                <input type="text" name="name" placeholder="name" value={this.state.name} onChange={this.handleChange} />
-                <input type="text" name="username" placeholder="username" value={this.state.username} onChange={this.handleChange}/>
-                <input type="email" name="email" placeholder="email" value={this.state.email} onChange={this.handleChange}/>
-                <input type="text" name="img" placeholder="img" value={this.state.img} onChange={this.handleChange}/>
-                <input type="text" name="City" placeholder="city" value={this.state.city} onChange={this.handleChange}/>
+                <input type="text" name="name" placeholder="name" value={this.state.name} onChange={this.handleChange} /> <br></br>
+                <input type="text" name="username" placeholder="username" value={this.state.username} onChange={this.handleChange}/><br></br>
+                <input type="email" name="email" placeholder="email" value={this.state.email} onChange={this.handleChange}/><br></br>
+                <input type="text" name="img" placeholder="img" value={this.state.img} onChange={this.handleChange}/><br></br>
+                <input type="text" name="City" placeholder="city" value={this.state.city} onChange={this.handleChange}/><br></br>
                 <input type="submit" value="Submit Post" />
            </form>
            
            <button onClick={() =>this.setModalFalse()}>Return</button>
            </Modal>
-           
+          
+           <br></br>
            <button><Link to="/show">Show Cities</Link></button>
-           
+           </div>
            <br></br>
            
            <Route exact path="/profile" render={(props) => {return <PostsUser destroyPost={this.destroyPost} posts={this.state.userPosts} />}} />

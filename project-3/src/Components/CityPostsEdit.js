@@ -20,13 +20,15 @@ class CityPostsEdit extends Component {
     
     render() { 
         return(
-        <form onSubmit={(e) => this.props.updatePost(e, this.props.postId, this.state)}>
-            <h1>Edit Current Post</h1>
-            <input type="text" name="title" placeholder="Title" onChange={this.handleChange} />
-            <input type="text" name="body" placeholder="Body" onChange={this.handleChange} />
-            <input type="text" name="City" placeholder="City ID" onChange={this.handleChange} />
-            <input type="submit" value="Submit Post" />
-        </form>
+            <div className="editPost">
+            <form onSubmit={(e) => this.props.updatePost(e, this.props.postId, this.state)}>
+                <h1>Edit Current Post</h1>
+                <input type="text" name="title" placeholder="Title" onChange={this.handleChange} />
+                <input type="text" name="body" placeholder="Body" onChange={this.handleChange} />
+                <input type="submit" value="Submit Post" />
+                
+            </form>
+            </div>
         )
     }
 }
