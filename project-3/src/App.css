@@ -7,6 +7,19 @@
   pointer-events: none;
 }
 
+.signin {
+  background-color:#282c34;
+}
+
+.reviewBox {
+  background-color: royalblue;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-evenly;
+  height: 50vh;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
@@ -15,7 +28,7 @@
 
 .App-header {
   background-color: #282c34;
-  min-height: 100vh;
+  min-height: 25vh;
   display: flex;
   flex-direction: column;
   align-items: center;
