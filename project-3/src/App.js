@@ -112,7 +112,7 @@ class App extends Component {
     return (
     <div className="App">
       <header className="App-header">
-        <h2>Wayfarer</h2>
+        <h2>Wayfarer: Food Tours</h2>
         <Link to={'/'}><button>Home</button></Link>
         {this.state.userProfile && <Link to={'/profile'}><button>Profile</button></Link> }
         
