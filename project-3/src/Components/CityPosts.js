@@ -5,7 +5,7 @@ function CityPosts(props){
     <div className="cityPosts">
         {props.posts.map((post, id) => {
             return(
-            <div className="singlePost" key={id}>
+            <div className="singleCityPost" key={id}>
                 <h3>{post.title}</h3>
                 <p>{post.body}</p>
             </div>
