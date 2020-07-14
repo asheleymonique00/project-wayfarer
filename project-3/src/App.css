@@ -1,5 +1,7 @@
 .App {
   text-align: center;
+  background-color: #282c34;
+  height: 100vh;
 }
 
 .App-logo {
@@ -9,6 +11,11 @@
 
 .signin {
   background-color:#282c34;
+  color: whitesmoke;
+}
+
+.home {
+  background-color: white;
 }
 
 .reviewBox {
@@ -17,7 +24,14 @@
   flex-wrap: wrap;
   flex-direction: row;
   justify-content: space-evenly;
-  height: 50vh;
+  height:auto;
+  padding: 10px;
+  margin-bottom: 5px;
+}
+.homeBox {
+  background-color: silver;
+  border: white 1px solid;
+  width: 350px;
 }
 
 @media (prefers-reduced-motion: no-preference) {
